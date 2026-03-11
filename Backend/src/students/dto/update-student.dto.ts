@@ -1,5 +1,20 @@
-import { PartialType } from '@nestjs/mapped-types';
-import { CreateStudentDto } from './create-student.dto';
+import { IsString, IsEmail, IsInt, MinLength, MaxLength, Min, Max, IsOptional } from 'class-validator';
 
-// All fields optional, but any provided field is still validated
-export class UpdateStudentDto extends PartialType(CreateStudentDto) {}
+export class UpdateStudentDto {
+  @IsOptional()
+  @IsString()
+  @MinLength(2)
+  @MaxLength(120)
+  name?: string;
+
+  @IsOptional()
+  @IsEmail()
+  @MaxLength(200)
+  email?: string;
+
+  @IsOptional()
+  @IsInt()
+  @Min(10)
+  @Max(100)
+  age?: number;
+}
